@@ -26,8 +26,8 @@ public class Sorting {
      * @param comparator The Comparator used to compare the data in arr.
      */
     public static <T> void bubbleSort(T[] arr, Comparator<T> comparator) {
-        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        /**
+
+        /** Basic Case:
          * stopIndex becomes array.length -1
          * while( stopIndex > 0){
          *     initialize inner loop index ,i
@@ -53,6 +53,20 @@ public class Sorting {
          *     stopIndex = lastSwapped
          */
 
+        int stopIndex = arr.length-1;
+        while(stopIndex > 0){
+                int i = 1; //inner loop index
+                int lastSwapped = 1;
+                while( i < stopIndex){
+                    if (array[i] > array[i+1]){
+                        arr[i+1] = arr[i];
+                        lastSwapped = i;
+                    }
+                    i++;
+                }
+                stopIndex = lastSwapped;
+            }
+        }
 
 
 
