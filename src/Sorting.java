@@ -54,23 +54,25 @@ public class Sorting {
          */
 
         int stopIndex = arr.length-1;
-        while(stopIndex > 0){
-                int i = 1; //inner loop index
-                int lastSwapped = 1;
+        while(stopIndex != 0){
+                int i = 0; //inner loop index
+                int lastSwapped = 0;
                 while( i < stopIndex){
-                    if (array[i] > array[i+1]){
+                    if (comparator.compare(arr[i], arr[i+1]) > 0){
+                        T temp = arr[i+1];
                         arr[i+1] = arr[i];
+                        arr[i] = temp;
                         lastSwapped = i;
                     }
                     i++;
                 }
-                stopIndex = lastSwapped;
+                if(lastSwapped != stopIndex)
+                    stopIndex = lastSwapped;
+                else
+                    stopIndex --;
             }
         }
 
-
-
-    }
 
     /**
      * Implement selection sort.
@@ -91,7 +93,17 @@ public class Sorting {
      * @param comparator The Comparator used to compare the data in arr.
      */
     public static <T> void selectionSort(T[] arr, Comparator<T> comparator) {
-        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+
+        for(int n = 0; n < arr.length; n++){
+            int smallest = n;
+            for (int i = n+1; i < arr.length; i++) {
+                if (comparator.compare(arr[smallest], arr[i]) > 0)
+                    smallest = i;
+            }
+            T temp = arr[n];
+            arr[n] = arr[smallest];
+            arr[smallest] = temp;
+        }
     }
 
     /**
@@ -113,6 +125,21 @@ public class Sorting {
      * @param comparator The Comparator used to compare the data in arr.
      */
     public static <T> void insertionSort(T[] arr, Comparator<T> comparator) {
-        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        /**
+         * for(int i = 0; i>arr.length; i++)
+         *     int innerLoop = 0
+         *     while( i != 0 && arr[i] < arr[i+1])
+         *         swap values at i and i - 1
+         *         decrement i
+         */
+        for(int outerLoop = 1; outerLoop < arr.length; outerLoop++){
+            int innerLoop = outerLoop;
+                while (innerLoop != 0 && comparator.compare(arr[innerLoop], arr[innerLoop - 1]) < 0) {
+                    T temp = arr[innerLoop - 1];
+                    arr[innerLoop - 1] = arr[innerLoop];
+                    arr[innerLoop] = temp;
+                    innerLoop--;
+                }
+        }
     }
 }
